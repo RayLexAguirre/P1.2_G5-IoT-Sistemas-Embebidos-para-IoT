@@ -8,7 +8,7 @@ public:
       String Data = Serial.readStringUntil('\n'); //Revisa el string ingresado e ignora el salto de línea
       post_data(Data);
     } else {
-      Serial.println("INGRESA UN NÚMERO"); //Si no recibe nada entonces pedirá el ingreso de un número
+      Serial.println("INGRESA UNA VARIABLE"); //Si no recibe nada entonces pedirá el ingreso de un número
       delay(3000);
     }
 }
@@ -63,69 +63,60 @@ void get_min (int num) {
   int64_t iminT64 = 0;
   
     if(num == 8){
-      iminT8 = pow(2, 8-1) -1;
-      Serial.println(iminT8);
+      iminT8 = -pow(2, 8-1);
+      Serial.print(iminT8);
     } else if (num == 16){
-      iminT16 = pow(2, 16-1) -1;
-      Serial.println(iminT16);
+      iminT16 = -pow(2, 16-1);
+      Serial.print(iminT16);
     } else if (num == 32){
-      iminT32 = pow(2, 32-1) -1;
-      Serial.println(iminT32);
+      iminT32 = -pow(2, 32-1);
+      Serial.print(iminT32);
     } else if (num == 64){
-      iminT64 = pow(2, 64-1) -1;
-      Serial.println(iminT64);
+      iminT64 = -pow(2, 64-1);
+      Serial.print(iminT64);
     }
   }
 
-void post_data(char Data){ //Organización de los resultados de todas las funciones
+void post_data(String Data){ //Organización de los resultados de todas las funciones
   Serial.print("-----Calculando rango de ");
   Serial.print(Data);
   Serial.println("-----");
-  
-  switch (Data){
-  case 'uint8':
-  Serial.print("Rango de 0 a ");
+
+  if (Data == "uint8"){
+    Serial.print("Rango de 0 a ");
     get_max(0, 8);
-    break;
-  case 'uint16':
-  Serial.print("Rango de 0 a ");
+  } else if (Data == "uint16"){
+    Serial.print("Rango de 0 a ");
     get_max(0, 16);
-    break;
-  case 'uint32':
-  Serial.print("Rango de 0 a ");
+  } else if (Data == "uint32"){
+    Serial.print("Rango de 0 a ");
     get_max(0, 32);
-    break;
-  case 'uint64':
-  Serial.print("Rango de 0 a ");
+  } else if (Data == "uint64"){
+    Serial.print("Rango de 0 a ");
     get_max(0, 64);
-    break;
-  case 'int8':
-  Serial.print("Rango de ");
+  } else if (Data == "int8"){
+    Serial.print("Rango de ");
     get_min(8);
-  Serial.print(" a ");
+    Serial.print(" a ");
     get_max(1, 8);
-    break;
-  case 'int16':
-  Serial.print("Rango de ");
+  } else if (Data == "int16"){
+    Serial.print("Rango de ");
     get_min(16);
-  Serial.print(" a ");
+    Serial.print(" a ");
     get_max(1, 16);
-    break;
-  case 'int32':
-  Serial.print("Rango de ");
+  }  else if (Data == "int32"){
+    Serial.print("Rango de ");
     get_min(32);
-  Serial.print(" a ");
+    Serial.print(" a ");
     get_max(1, 32);
-    break;
-  case 'int64':
-  Serial.print("Rango de ");
+  } else if (Data == "int64"){
+    Serial.print("Rango de ");
     get_min(64);
-  Serial.print(" a ");
+    Serial.print(" a ");
     get_max(1, 64);
-    break;
-  default:
+  } else {
     Serial.println("Variable no valida");
-    break;
   }
+  
 }
 };
